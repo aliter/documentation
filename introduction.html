@@ -1,0 +1,175 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introduction &mdash; Aliter v0.0.dev documentation</title>
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Aliter v0.0.dev documentation" href="index.html" />
+   
+  
+  <link media="only screen and (max-device-width: 480px)" href="_static/small_flask.css" type= "text/css" rel="stylesheet" />
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="index.html">Aliter v0.0.dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="introduction">
+<span id="ref-introduction"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="philosophy">
+<h2>Philosophy<a class="headerlink" href="#philosophy" title="Permalink to this headline">¶</a></h2>
+<p>(Still thinking about that one.)</p>
+</div>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p>The server emulator for <a class="reference external" href="http://en.wikipedia.org/wiki/Ragnarok_Online/">Ragnarok Online</a> that would later become Aliter
+started off as a small proof-of-concept codenamed &#8220;Sidewinder.&#8221;</p>
+<p>It was developed by a member of the original Nyxsis private server, as a test
+to see if a comparable emulator to the long-standing go-to emulator,
+<a class="reference external" href="http://eathena.ws/">eAthena</a>, could be built in Python. This was because Sidewinder&#8217;s creator as
+well as Nyxsis&#8217; creator had been learning Python at the time and had even
+created a Python-based Ragnarok control panel—Minerva. After a few weeks, the
+cornerstones of any Ragnarok emulator, the login server, the character server
+and the map (or zone) server were successfully built and the proof stopped
+there.</p>
+<p>Hightened interest in a more modernly coded and agile competitor to eAthena
+led to the current team being given permission to use Sidewinder as a
+foundation for builiding Aliter. After a few weeks of refactoring and
+rebuilding, it was found that building a server emulator in Python wasn&#8217;t the
+ideal course of action, even though there existed a Python-based MMORPG in
+<a class="reference external" href="http://www.eveonline.com/">EVE Online</a> by <a class="reference external" href="http://www.ccpgames.com/">CCP Games</a>. This was mostly for architectural reasons,
+which included the <a class="reference external" href="http://en.wikipedia.org/wiki/Global_Interpreter_Lock">Global Intrepreter Lock</a> and Python&#8217;s difficulty (at the
+time) when it came to dealing with threading. While the concept worked for a
+single player, at two to three concurrent players the software would quickly
+devour resources. <a class="reference external" href="http://www.stackless.com/">Stackless Python</a> which was the version the team later
+found was used by CCP, was a non-starter since the process of getting
+Stackless to work in the eyes of an end-user was deemed too complicated.</p>
+<p>The Python version was tagged for posterity and subsequently scrapped, leading
+to the emergence of a version built in <a class="reference external" href="http://en.wikipedia.org/wiki/Haskell_(programming_language)">Haskell</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">(The reasons for leaving Haskell can&#8217;t be remembered by the author at the
+moment, so it&#8217;ll be filled at a later time.)</p>
+</div>
+<p>The Haskell version was tagged for posterity and also subsequently scrapped,
+leading to the emergence of the current Aliter project, built in Erlang.</p>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Erlang_(programming_language)">Erlang</a> and its history as a functional programming language built for
+applications in telecommunications by <a class="reference external" href="http://en.wikipedia.org/wiki/Ericsson">Ericsson</a> became the perfect fit for a
+server emulator. All the specifics about why the team chose Erlang can be seen
+below in the &#8220;Why Erlang?&#8221; section.</p>
+</div>
+<div class="section" id="why-erlang">
+<h2>Why Erlang?<a class="headerlink" href="#why-erlang" title="Permalink to this headline">¶</a></h2>
+<p>If you&#8217;re one to gloss over large words and definitions, prepare yourself.
+Wikipedia says this about Erlang:</p>
+<blockquote>
+<div><p>Erlang is a general-purpose concurrent, garbage-collected programming
+language and runtime system. The sequential subset of Erlang is a
+functional language, with strict evaluation, single assignment, and
+dynamic typing. For concurrency it follows the Actor model. It was
+designed by Ericsson to support distributed, fault-tolerant, soft-real-
+time, non-stop applications. It supports hot swapping, thus code can be
+changed without stopping a system.</p>
+<p>While threads are considered a complicated and error-prone topic in most
+languages, Erlang provides language-level features for creating and
+managing processes with the aim of simplifying concurrent programming.
+Though all concurrency is explicit in Erlang, processes communicate using
+message passing instead of shared variables, which removes the need for
+locks.</p>
+</div></blockquote>
+<p>If we haven&#8217;t lost you yet, allow us to explain it:</p>
+<ul class="simple">
+<li>Erlang was originally designed and developed by Ericsson, the Swedish
+<strong>telecommunications</strong> company. (You probably know them for their mobile
+phones.) It was built first and foremost as a language built for that
+industry.</li>
+<li>It was used to create software for Ericsson&#8217;s AXD301 router that
+were reported to achieve <strong>reliablilty</strong> of &#8220;nine 9s&#8221; (or 99.999999999%),
+which equates to mere seconds of downtime per year. It&#8217;s a language that&#8217;s
+spilt its blood for enterprise applications.</li>
+<li>It&#8217;s <strong>concurrent</strong> and <strong>fault-tolerant</strong> from the ground up.</li>
+<li><strong>Hot-swapping.</strong> Erlang can reload code on the fly. Need to make a change
+to a server for customizations? Make your changes and reload your code, none
+of your users will feel a thing.</li>
+<li>(To be continued..)</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction</a><ul>
+<li><a class="reference internal" href="#philosophy">Philosophy</a></li>
+<li><a class="reference internal" href="#background">Background</a></li>
+<li><a class="reference internal" href="#why-erlang">Why Erlang?</a></li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/introduction.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2011, Alex Suraci and Bryan Veloso.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a>.
+    </div>
+  </body>
+</html>

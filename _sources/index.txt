@@ -1,15 +1,17 @@
-.. Aliter documentation master file, created by
-   sphinx-quickstart on Sat Jun  4 23:57:35 2011.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. _ref-index:
 
-Welcome to Aliter's documentation!
-==================================
+======
+Aliter
+======
 
-Contents:
+Aliter is an open-source server emulator for the Ragnarok Online MMORPG
+written in Erlang. It aims to produce best-in-class results for those who wish
+to run their own server backed by programming that was meant for the job.
 
 .. toctree::
    :maxdepth: 2
+
+   introduction
 
 Indices and tables
 ==================
